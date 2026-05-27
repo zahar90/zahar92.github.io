@@ -1,0 +1,321 @@
+/* Обнуление базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0f18;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Элемент светящегося неонового фона */
+.bg-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(46, 204, 113, 0.15) 0%, rgba(0,0,0,0) 70%);
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+/* Шапка сайта */
+header {
+    text-align: center;
+    padding: 60px 20px 20px;
+}
+
+.main-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(46, 204, 113, 0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #8a99ad;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+/* Сетка для двух мега-карточек */
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+/* Стили премиальной карточки (Эффект стекла) */
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    width: 450px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(46, 204, 113, 0.4);
+    box-shadow: 0 30px 60px rgba(46, 204, 113, 0.15);
+}
+
+/* Контейнер картинки */
+.image-box {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .image-box img {
+    transform: scale(1.05);
+}
+
+/* Индикаторы на картинках */
+.card-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.card-badge.MAN {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+}
+
+/* Текстовая зона карточки */
+.card-content {
+    padding: 30px;
+}
+
+.card-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.card-content p {
+    color: #a0aec0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    height: 70px;
+}
+
+/* Блок с кнопками управления */
+.card-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Мега-кнопка Заказа */
+.btn-mega {
+    flex: 2;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    border: none;
+    padding: 15px;
+    border-radius: 14px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.btn-mega:hover {
+    box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+    transform: scale(1.02);
+}
+
+/* Кнопка Позвонить */
+.btn-call {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 14px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-call:hover {
+    background: white;
+    color: #0a0f18;
+    transform: scale(1.02);
+}
+
+/* ИНТЕРФЕЙС МОДАЛЬНОГО ОКНА */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 10, 20, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-window {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 28px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-window {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+.modal-window h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.modal-warning {
+    background: rgba(243, 156, 18, 0.1);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+    color: #f39c12;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 25px;
+}
+
+/* Поле с номером телефона */
+.phone-display {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+/* Кнопка копировать номер */
+.btn-copy {
+    width: 100%;
+    background: #34495e;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-copy:hover {
+    background: #4b6584;
+}
+
+/* Дополнительные анимации */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Подвал */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #4a5568;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 768px) {
+    .main-title { font-size: 2rem; }
+    .card { width: 100%; }
+    .card-buttons { flex-direction: column; }
+}
